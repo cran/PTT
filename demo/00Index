@@ -1,0 +1,7 @@
+marginal_1d_comparison	APT and OPT comparison with an adaptive-partition display
+marginal_1d_mixture	Historical univariate mixture workflow with APT and OPT fits
+marginal_2d_partition	Bivariate predictive-density map and hMAP partition
+marginal_2d_mixture	Historical bivariate Markov APT mixture workflow
+conditional_1d_surface	Conditional-density heatmap with fitted slices
+conditional_1d_regimes	Historical piecewise conditional OPT workflow
+conditional_2d_mixture	Historical bivariate conditional OPT workflow (long-running)

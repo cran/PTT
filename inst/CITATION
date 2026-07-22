@@ -1,0 +1,37 @@
+citHeader("To cite PTT or its implemented methods, use one or more of:")
+
+bibentry(
+  bibtype = "Article",
+  title = "Adaptive Shrinkage in Pólya Tree Type Models",
+  author = person("Li", "Ma"),
+  journal = "Bayesian Analysis",
+  year = "2017",
+  volume = "12",
+  number = "3",
+  pages = "779--805",
+  doi = "10.1214/16-BA1021"
+)
+
+bibentry(
+  bibtype = "Article",
+  title = "Recursive Partitioning and Multi-Scale Modeling on Conditional Densities",
+  author = person("Li", "Ma"),
+  journal = "Electronic Journal of Statistics",
+  year = "2017",
+  volume = "11",
+  number = "1",
+  pages = "1297--1325",
+  doi = "10.1214/17-EJS1254"
+)
+
+bibentry(
+  bibtype = "Article",
+  title = "Optional Pólya Tree and Bayesian Inference",
+  author = c(person("Wing H.", "Wong"), person("Li", "Ma")),
+  journal = "The Annals of Statistics",
+  year = "2010",
+  volume = "38",
+  number = "3",
+  pages = "1433--1459",
+  doi = "10.1214/09-AOS755"
+)
