@@ -28,7 +28,8 @@
 #'   where `nu` is the beta precision (shrinkage) parameter.
 #' @param n.grid Number of midpoint quadrature points within each shrinkage
 #'   state.
-#' @param n.s Number of non-stopping shrinkage states.
+#' @param n.s Number of non-stopping shrinkage states. Must be an integer from
+#'   1 to 65,534.
 #' @param beta Nonnegative stickiness parameter in the exponential transition
 #'   kernel. `beta = 0` gives uniform probability over admissible higher states.
 #' @param n.post.samples Number of posterior partition samples to draw.
@@ -68,6 +69,7 @@ apt <- function(X, Xpred = NULL, Omega.type = "unit", max.resol = 10,
 
   Omega.type <- match.arg(Omega.type, c("unit", "standardized"))
   max.resol <- .integer_arg(max.resol, "max.resol", 1L, 14L)
+  .validate_tree_capacity(p, max.resol, "X")
   rho0 <- .numeric_arg(rho0, "rho0", 0, 1)
   rho0.mode <- .integer_arg(rho0.mode, "rho0.mode", 0L, 2L)
   tran.mode <- .integer_arg(tran.mode, "tran.mode", 0L, 2L)
@@ -77,7 +79,7 @@ apt <- function(X, Xpred = NULL, Omega.type = "unit", max.resol = 10,
     stop("`lognu.lb` must not exceed `lognu.ub`.", call. = FALSE)
   }
   n.grid <- .integer_arg(n.grid, "n.grid", 1L)
-  n.s <- .integer_arg(n.s, "n.s", 1L)
+  n.s <- .integer_arg(n.s, "n.s", 1L, 65534L)
   beta <- .numeric_arg(beta, "beta", 0)
   n.post.samples <- .integer_arg(n.post.samples, "n.post.samples", 0L)
 

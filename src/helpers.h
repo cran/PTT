@@ -36,7 +36,7 @@ void print_index_2(INDEX_TYPE & I, int level, int k);
 
 unsigned int Choose(int n, int k);
 
-unsigned int get_node_index(INDEX_TYPE& I,int level);
+unsigned long long get_node_index(INDEX_TYPE& I,int level);
 
 INDEX_TYPE init_index(int n,int level);
 

@@ -1,5 +1,7 @@
 #include "cgbt.h"
 
+#include <type_traits>
+
 #include <vector>
 using namespace std;
 
@@ -211,7 +213,12 @@ pair< vector< vector< ushort > >, vector< double > > CondGBT::find_hmap_part() {
   ushort x_curr = 0;
   ushort index_prev_var = 0;
   ushort lower = 0;
-  ushort x_curr_count = -1;
+  // -1 denotes that no split has yet been visited, so this must stay signed.
+  int x_curr_count = -1;
+  static_assert(
+    std::is_signed<decltype(x_curr_count)>::value,
+    "x_curr_count must be signed because -1 is a sentinel"
+  );
 
   find_hmap(0);
 
@@ -288,7 +295,7 @@ int CondGBT::find_sample_part(vector< vector< ushort > > &part_points) {
   ushort x_curr = 0;
   ushort index_prev_var = 0;
   ushort lower = 0;
-  ushort x_curr_count = -1;
+  int x_curr_count = -1;
 
   part_points.clear();
 

@@ -46,7 +46,7 @@ public:
     void remove_data_from_subtree(INDEX_TYPE I, int level, int x_curr, int part_count, Col< unsigned int > obs);
     int update_subtree_add_new_data(INDEX_TYPE I, int level, int x_curr, int part_count, Col< unsigned int > new_obs);
     int update_subtree_remove_new_data(INDEX_TYPE I, int level, int x_curr, int part_count, Col< unsigned int > new_obs);
-    unsigned int get_node_index(INDEX_TYPE& I,int level);
+    unsigned long long get_node_index(INDEX_TYPE& I,int level);
     //getters
     double get_root_logrho();
     double get_root_logphi();

@@ -7,6 +7,33 @@ using namespace Rcpp;
 using namespace arma;
 using namespace std;
 
+namespace {
+
+void validate_tree_capacity(int dimensions, int resolution, const char* label) {
+  const int max_dimensions =
+    static_cast<int>(std::numeric_limits<ushort>::max()) - resolution + 1;
+  if (dimensions > max_dimensions) {
+    Rcpp::stop(
+      "%s has %d dimensions, but resolution %d supports at most %d.",
+      label, dimensions, resolution, max_dimensions
+    );
+  }
+}
+
+void validate_computation_sizes(int n_grid, int n_s, int n_post_samples) {
+  const int max_states =
+    static_cast<int>(std::numeric_limits<ushort>::max()) - 1;
+  if (n_grid < 1) Rcpp::stop("The number of grid points must be positive.");
+  if (n_s < 1 || n_s > max_states) {
+    Rcpp::stop("The number of shrinkage states must be between 1 and %d.", max_states);
+  }
+  if (n_post_samples < 0) {
+    Rcpp::stop("The number of posterior samples must be nonnegative.");
+  }
+}
+
+} // namespace
+
 
 // [[Rcpp::export]]
 Rcpp::List fitPTTcpp(
@@ -44,6 +71,8 @@ Rcpp::List fitPTTcpp(
                     k, MAXVAR - 1, MAXVAR - 1);
       k = MAXVAR - 1;
     }
+    validate_tree_capacity(p, k, "X");
+    validate_computation_sizes(n_grid, n_s, n_post_samples);
 
     // constants for rescaling the observations according to the sample space
     vec a = 1.0 / (Omega.col(1) - Omega.col(0));
@@ -191,6 +220,9 @@ Rcpp::List fitCondPTTcpp( // conditional Polya tree type models
                   k_Y, MAXVAR - 1, MAXVAR - 1);
     k_Y = MAXVAR - 1;
   }
+  validate_tree_capacity(p_X, k_X, "X");
+  validate_tree_capacity(p_Y, k_Y, "Y");
+  validate_computation_sizes(n_grid_Y, n_s_Y, n_post_samples);
 
   vec a_X = 1.0 / (Omega_X.col(1) - Omega_X.col(0));
   vec b_X = - Omega_X.col(0) % a_X;

@@ -58,7 +58,8 @@ where `nu` is the beta precision (shrinkage) parameter.}
 \item{n.grid}{Number of midpoint quadrature points within each shrinkage
 state.}
 
-\item{n.s}{Number of non-stopping shrinkage states.}
+\item{n.s}{Number of non-stopping shrinkage states. Must be an integer from
+1 to 65,534.}
 
 \item{beta}{Nonnegative stickiness parameter in the exponential transition
 kernel. `beta = 0` gives uniform probability over admissible higher states.}

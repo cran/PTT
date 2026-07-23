@@ -54,6 +54,20 @@
   as.integer(x)
 }
 
+.validate_tree_capacity <- function(dimensions, resolution, name) {
+  max_dimensions <- 65535L - resolution + 1L
+  if (dimensions > max_dimensions) {
+    stop(
+      sprintf(
+        "`%s` has %d dimensions, but resolution %d supports at most %d.",
+        name, dimensions, resolution, max_dimensions
+      ),
+      call. = FALSE
+    )
+  }
+  invisible(NULL)
+}
+
 .numeric_arg <- function(x, name, lower = -Inf, upper = Inf) {
   if (length(x) != 1L || !is.numeric(x) || !is.finite(x) || x < lower || x > upper) {
     stop(

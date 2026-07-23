@@ -615,7 +615,7 @@ int GBT::find_sample_part(vector< vector< ushort > > &part_points, vector< vecto
   return part_points.size();
 }
 
-unsigned int GBT::get_node_index(INDEX_TYPE& I,int level){
+unsigned long long GBT::get_node_index(INDEX_TYPE& I,int level){
   unsigned long long  r = 0;
 
   unsigned long long numerator = 1;

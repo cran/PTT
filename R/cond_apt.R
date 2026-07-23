@@ -76,6 +76,8 @@ cond.apt <- function(X, Y, Xpred = NULL, Ypred = NULL,
   OmegaY.type <- match.arg(OmegaY.type, c("unit", "standardized"))
   max.resX <- .integer_arg(max.resX, "max.resX", 1L, 14L)
   max.resY <- .integer_arg(max.resY, "max.resY", 1L, 14L)
+  .validate_tree_capacity(p.X, max.resX, "X")
+  .validate_tree_capacity(p.Y, max.resY, "Y")
   rho0.X <- .numeric_arg(rho0.X, "rho0.X", 0, 1)
   rho0.Y <- .numeric_arg(rho0.Y, "rho0.Y", 0, 1)
   rho0.mode.X <- .integer_arg(rho0.mode.X, "rho0.mode.X", 0L, 2L)
@@ -87,7 +89,7 @@ cond.apt <- function(X, Y, Xpred = NULL, Ypred = NULL,
     stop("`lognu.lb` must not exceed `lognu.ub`.", call. = FALSE)
   }
   n.grid <- .integer_arg(n.grid, "n.grid", 1L)
-  n.s <- .integer_arg(n.s, "n.s", 1L)
+  n.s <- .integer_arg(n.s, "n.s", 1L, 65534L)
   beta <- .numeric_arg(beta, "beta", 0)
   n.post.samples <- .integer_arg(n.post.samples, "n.post.samples", 0L)
 

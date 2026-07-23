@@ -51,8 +51,39 @@ stopifnot(
   identical(dim(conditional$OmegaY), c(1L, 2L))
 )
 
+# Guard the conditional HMAP root range and its resolution-dependent children.
+# Sanitizer builds additionally verify that constructing these bounds does not
+# use an invalid shift count.
+conditional.part <- unname(
+  conditional$part_points_hmap[
+    , c("X1.l", "X1.u", "level"), drop = FALSE
+  ]
+)
+expected.conditional.part <- matrix(
+  c(
+    0, 3, 0,
+    0, 1, 1,
+    2, 3, 1
+  ),
+  nrow = 3L,
+  byrow = TRUE
+)
+stopifnot(
+  identical(conditional.part, expected.conditional.part),
+  all(
+    conditional.part[, 2L] - conditional.part[, 1L] + 1 ==
+      2^(2 - conditional.part[, 3L])
+  )
+)
+
 stopifnot(
   inherits(try(apt(c(-1, 0), max.resol = 2), silent = TRUE), "try-error"),
   inherits(try(apt(x, max.resol = 15), silent = TRUE), "try-error"),
+  inherits(try(apt(x, max.resol = 2, n.s = 65535), silent = TRUE), "try-error"),
   inherits(try(cond.apt(x, x, Xpred = 0.5), silent = TRUE), "try-error")
+)
+
+wide <- matrix(0.5, nrow = 1L, ncol = 65536L)
+stopifnot(
+  inherits(try(apt(wide, max.resol = 1), silent = TRUE), "try-error")
 )

@@ -1,3 +1,20 @@
+# PTT 1.0.1
+
+## Correctness
+
+- Fixes undefined behavior in conditional hierarchical MAP partition output
+  caused by using an unsigned counter with `-1` as its initial sentinel.
+- Uses 64-bit node offsets to avoid truncation when indexing larger trees.
+- Rejects predictor/response dimension and shrinkage-state configurations that
+  exceed the capacity of the internal partition representation.
+
+## Validation
+
+- Adds regression checks for conditional partition boundaries and supported
+  input capacities.
+- Audits the remaining bit shifts and verifies the package examples, tests,
+  and demos with undefined-behavior and address sanitizers.
+
 # PTT 1.0
 
 PTT 1.0 is the first official release of the package.

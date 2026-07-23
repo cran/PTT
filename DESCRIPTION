@@ -1,7 +1,7 @@
 Package: PTT
 Type: Package
 Title: Pólya Tree Type Models
-Version: 1.0
+Version: 1.0.1
 Authors@R: person("Li", "Ma", email = "mastatlab@gmail.com",
     role = c("aut", "cre"))
 Description: Fits Bayesian nonparametric models based on Pólya tree
@@ -18,8 +18,8 @@ Imports: Rcpp (>= 1.0.0)
 LinkingTo: Rcpp, RcppArmadillo
 NeedsCompilation: yes
 Config/roxygen2/version: 8.0.0
-Packaged: 2026-07-14 03:49:20 UTC; li.ma
+Packaged: 2026-07-22 23:27:27 UTC; li.ma
 Author: Li Ma [aut, cre]
 Maintainer: Li Ma <mastatlab@gmail.com>
 Repository: CRAN
-Date/Publication: 2026-07-22 08:00:08 UTC
+Date/Publication: 2026-07-23 10:50:41 UTC
